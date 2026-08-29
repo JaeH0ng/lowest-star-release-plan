@@ -7,17 +7,17 @@ const budgetGroups = [
     ],
   },
   {
-    key: 'fee', number: '02', title: '참여 사례비', total: 400000,
+    key: 'art', number: '02', title: '그림 · 스톱모션', total: 520000,
     rows: [
       ['기획 · 미술 2명 × 15만 원', 300000],
-      ['동해 촬영 참여 1일', 100000],
+      ['스톱모션 · 소품 · 미술 재료', 180000],
+      ['조명 · 촬영 세팅', 40000],
     ],
   },
   {
-    key: 'make', number: '03', title: '제작 · 실비', total: 400000,
+    key: 'video', number: '03', title: '영상 · 촬영', total: 280000,
     rows: [
-      ['스톱모션 · 소품 · 미술 재료', 180000],
-      ['조명 · 촬영 세팅', 40000],
+      ['동해 촬영 참여 1일', 100000],
       ['동해 이동 · 유류 · 통행 · 주차', 80000],
       ['촬영 · 작업일 식사 · 간식', 70000],
       ['저장 · 백업 매체', 20000],
@@ -145,7 +145,7 @@ export default function Home() {
       <section className="section-shell" id="budget">
         <div className="section-heading">
           <div><p className="eyebrow">BUDGET</p><h2>총예산 130만 원</h2></div>
-          <p className="budget-heading-total">음원 50 · 사례비 40 · 제작 40</p>
+          <p className="budget-heading-total">음원 50 · 그림 52 · 영상 28</p>
         </div>
 
         <div className="budget-groups">
@@ -165,8 +165,9 @@ export default function Home() {
         </div>
         <div className="budget-grand-total"><span>WORKING BUDGET</span><strong>1,300,000원</strong></div>
         <p className="budget-condition">
-          * 동해 촬영은 무박 1일 기준입니다. 재료 · 조명 · 교통 · 식사는 전액 제작자가 부담하며, 참여자가 비용을 먼저 지출하지 않도록 직접 결제 또는 사전 지급합니다.
-          재료비는 콘셉트 확정 후와 중간 점검 후 두 차례로 나누어 집행합니다.
+          * 사례비는 기획 · 미술 2명 각 15만 원, 동해 촬영 10만 원입니다. 재료 · 조명 · 교통 · 식사는 사례비와 분리해 전액 제작자가 부담하며,
+          참여자가 비용을 먼저 지출하지 않도록 직접 결제 또는 사전 지급합니다. 재료비는 콘셉트 확정 후와 중간 점검 후 두 차례로 나누어 집행합니다.
+          동해 촬영은 무박 1일 기준입니다.
         </p>
       </section>
 
@@ -200,6 +201,10 @@ export default function Home() {
         <p className="budget-condition">
           * 크레딧은 영상 엔딩 · 공개 채널 설명란 · 음원 앨범 소개 · 작품 아카이브 페이지 네 곳 모두에 표기하며, 역할명은 각자가 직접 정합니다.
           사례비는 계좌이체로 지급하여 예술활동 수입 증빙이 남도록 합니다.
+        </p>
+        <p className="budget-condition">
+          * 킥오프에는 권리 안내문 · 제작 개요 · 발매 계획 · 참여 계약서를 역할별로 인쇄해 나눕니다.
+          계약서는 그 자리에서 작성하고 양측이 날인하여 각 1부씩 보관합니다.
         </p>
       </section>
 
@@ -263,28 +268,42 @@ export default function Home() {
       <section className="meeting-section" id="meeting">
         <div className="meeting-title">
           <p className="eyebrow">KICKOFF · 2026.09.02</p>
-          <h2>수요일 회의에서<br />반드시 끝낼 것</h2>
-          <p>완성된 콘티를 가져가는 자리가 아니라, 각자가 무엇을 갖고 무엇을 언제까지 할지 결정하는 자리다.</p>
+          <h2>수요일 회의에서<br />의논할 것</h2>
+          <p>완성된 콘티를 가져가는 자리가 아니라, 각자가 무엇을 갖고 무엇을 언제까지 할지 결정하는 자리다. 받아들이기 어려운 것이 있으면 그날 말하는 편이 서로에게 낫다.</p>
         </div>
-        <div className="meeting-columns">
+        <div className="meeting-columns meeting-three">
           <article>
-            <span className="meeting-number">A</span><h3>가져갈 자료</h3>
+            <span className="meeting-number">A</span><h3>정하고 가는 것<br /><em>받아들일 수 있는지 확인</em></h3>
             <ol>
-              <li><b>권리 안내문</b><small>각자가 갖는 권리, 제작자가 준비할 자료, 예술활동증명</small></li>
-              <li><b>안건표</b><small>순서와 시간이 정해진 진행표</small></li>
-              <li><b>예산 확정안 130만 원</b><small>항목별 상한과 실비 정산 방식</small></li>
-              <li><b>참여 계약서</b><small>1인당 2부. 그 자리에서 작성하고 날인</small></li>
-              <li><b>데모와 레퍼런스</b><small>곡, 스톱모션 톤, 동해 로케이션 후보</small></li>
+              <li><b>총예산 130만 원 고정</b><small>늘릴 수 없다. 필요하면 범위를 줄인다</small></li>
+              <li><b>사례비</b><small>기획 · 미술 각 15만 원, 동해 촬영 10만 원</small></li>
+              <li><b>재료비 18만 원</b><small>제작자가 직접 결제해 참여자 지출이 없게 한다</small></li>
+              <li><b>음원 50만 원은 타협하지 않는다</b><small>곡이 본체이고 뮤비는 곡을 알리는 수단이다</small></li>
+              <li><b>동해 촬영은 1일</b><small>2일은 감당이 어렵다. 필요하면 찍을 것을 줄인다</small></li>
+              <li><b>식대 기준</b><small>촬영일 · 작업일은 제작자, 회의 술자리는 각자</small></li>
+              <li><b>저작권은 각자 보유</b><small>제작자는 뮤직비디오 사용권만 갖는다</small></li>
             </ol>
           </article>
           <article>
-            <span className="meeting-number">B</span><h3>그날 결정할 것</h3>
+            <span className="meeting-number">B</span><h3>반드시 결정<br /><em>없으면 다음이 막힌다</em></h3>
             <ol>
-              <li><b>크레딧 이름과 역할명</b><small>각자 직접 정한다. 모호한 표기는 쓰지 않는다</small></li>
-              <li><b>콘셉트와 동해 필수 컷</b><small>없으면 성립하지 않는 컷이 무엇인지</small></li>
-              <li><b>동해 촬영일과 예비일</b><small>1 · 2순위, 현장 인원, 차량, 집합 시간</small></li>
-              <li><b>스톱모션 기획안 마감일</b><small>09.16 목표. 분량과 기법, 작업 공간</small></li>
-              <li><b>계약 체결과 정산 방식</b><small>사례비 지급 시기, 재료비 집행 순서</small></li>
+              <li><b>크레딧 이름과 역할명</b><small>각자 다른 직종으로. 모호한 표기와 공동 표기는 쓰지 않는다</small></li>
+              <li><b>계약서 작성과 날인</b><small>성명 · 생년월일 · 계좌. 나중에 하려면 다시 모여야 한다</small></li>
+              <li><b>동해 촬영일과 예비일</b><small>가장 먼저 잠가야 하는 날짜. 회신 마감 09.09</small></li>
+              <li><b>동해 현장 인원과 차량</b><small>여기서 식비와 이동비가 확정된다</small></li>
+              <li><b>편집 담당</b><small>사례비와 총예산은 어느 경우에도 변하지 않는다</small></li>
+              <li><b>스톱모션 인계 형태</b><small>완성 시퀀스인가 프레임 소스인가. 편집 부담을 결정한다</small></li>
+              <li><b>스톱모션 기획안 마감일</b><small>09.16 목표. 늦으면 재료 · 착수 · 러프컷이 밀린다</small></li>
+            </ol>
+          </article>
+          <article>
+            <span className="meeting-number">C</span><h3>방향만 잡는 것<br /><em>오늘 확정하지 않는다</em></h3>
+            <ol>
+              <li><b>콘셉트와 감정선</b><small>이 곡이 어떤 감정으로 끝나야 하는가</small></li>
+              <li><b>4분을 어떻게 채우는가</b><small>실사 30초 + 스톱모션. 노동량이 적은 기법도 섞는다</small></li>
+              <li><b>동해 필수 컷</b><small>없으면 성립 안 되는 컷인가, 있으면 좋은 컷인가</small></li>
+              <li><b>비가 왔을 때</b><small>대안 로케이션 · 예비일 재시도 · 후일 단독 촬영 중 택1</small></li>
+              <li><b>스톱모션 작업 공간</b><small>몇 주간 세팅을 고정해 둘 자리가 필요하다</small></li>
             </ol>
           </article>
         </div>
