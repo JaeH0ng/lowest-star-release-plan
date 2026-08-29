@@ -97,6 +97,7 @@ td { padding: 14px 10px; border-bottom: 1px solid var(--line); }
 .budget-grand-total { margin-top: 18px; padding: 22px 26px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: space-between; }
 .budget-grand-total span { color: var(--gold); font-size: 10px; font-weight: 800; letter-spacing: .16em; }
 .budget-grand-total strong { font: 30px Georgia, serif; }
+.budget-condition { margin: 14px 2px 0; color: #6f767e; font-size: 11px; line-height: 1.7; }
 
 .roadmap-section { background: var(--navy); color: #f8f6ef; }
 .roadmap-section .section-shell { padding-top: 110px; padding-bottom: 110px; }
