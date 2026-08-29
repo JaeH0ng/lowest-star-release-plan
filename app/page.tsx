@@ -1,15 +1,31 @@
-const budgetRows = [
-  ['음원 제작', '녹음 프로덕션', 200000, 'fixed'],
-  ['음원 제작', '믹스 · 마스터', 300000, 'fixed'],
-  ['뮤직비디오', '세트 · 소품 · 미술 재료', 140000, 'material'],
-  ['뮤직비디오', '렌즈 · 조명 등 장비 대여', 160000, 'material'],
-  ['뮤직비디오', '동해 이동 · 유류 · 통행 · 주차', 150000, 'material'],
-  ['뮤직비디오', '전체 촬영 식사 · 간식', 120000, 'material'],
-  ['뮤직비디오', '저장 · 의상 · 소모품 · 로케이션', 90000, 'material'],
-  ['뮤직비디오', '영상 촬영 · 메인 편집 사례비', 300000, 'labor'],
-  ['뮤직비디오', '미술 기획 · 세트 리드 사례비', 150000, 'labor'],
-  ['뮤직비디오', '추가 보조 인력 시간급 풀', 240000, 'labor'],
-  ['전체', '예비비', 150000, 'reserve'],
+const budgetGroups = [
+  {
+    key: 'audio', number: '01', title: '음원 제작', total: 500000,
+    rows: [
+      ['녹음 프로덕션', 200000],
+      ['믹스 · 마스터', 300000],
+    ],
+  },
+  {
+    key: 'art', number: '02', title: '뮤비 기획 · 미술', total: 500000,
+    rows: [
+      ['기획 · 미술 메인 2명 × 15만 원', 300000],
+      ['세트 · 소품 · 미술 재료', 140000],
+      ['의상 · 로케이션 · 소모품', 60000],
+    ],
+  },
+  {
+    key: 'shoot', number: '03', title: '촬영 · 후반 · 제작', total: 1000000,
+    rows: [
+      ['촬영 · 편집 메인 1명 × 15만 원', 150000],
+      ['렌즈 · 조명 등 장비 대여', 160000],
+      ['동해 이동 · 유류 · 통행 · 주차', 150000],
+      ['촬영 식사 · 간식', 120000],
+      ['저장 · 백업 매체', 30000],
+      ['추가 보조 인력 풀', 240000],
+      ['예비비', 150000],
+    ],
+  },
 ] as const;
 
 const formatWon = (value: number) => `${(value / 10000).toLocaleString('ko-KR')}만 원`;
@@ -98,7 +114,7 @@ export default function Home() {
             <h1>가장 낮은 별<br /><em>발매 프로젝트</em></h1>
             <p className="hero-copy">
               작사·작곡을 마친 한 곡을 음원과 뮤직비디오로 완성해 세상에 내놓기 위한
-              11주 실행 계획. 일정은 단단하게, 예산은 정직하게, 작품의 중심은 선명하게.
+              11주 실행 일정과 제작 계획.
             </p>
           </section>
           <aside className="release-card" aria-label="발매 목표 요약">
@@ -125,38 +141,25 @@ export default function Home() {
       <section className="section-shell" id="budget">
         <div className="section-heading">
           <div><p className="eyebrow">BUDGET</p><h2>총예산 200만 원</h2></div>
-          <p>핵심 창작자는 정액 사례비, 추가 보조 인력은 시간급, 교통·식사는 실비로 분리한다.</p>
+          <p className="budget-heading-total">음원 50 · 기획/미술 50 · 촬영/후반 100</p>
         </div>
 
-        <div className="budget-layout">
-          <div className="budget-table-wrap">
-            <table>
-              <thead><tr><th>구분</th><th>항목</th><th>금액</th></tr></thead>
-              <tbody>
-                {budgetRows.map(([category, item, amount, kind]) => (
-                  <tr key={item} className={`row-${kind}`}>
-                    <td>{category}</td><td>{item}</td><td>{formatWon(amount)}</td>
-                  </tr>
-                ))}
-              </tbody>
-              <tfoot><tr><td colSpan={2}>총합계</td><td>200만 원</td></tr></tfoot>
-            </table>
-          </div>
-
-          <aside className="budget-notes">
-            <div className="donut" aria-label="예산 비율: 음원 25%, 뮤직비디오 67.5%, 예비비 7.5%"><span>200<small>만원</small></span></div>
-            <ul>
-              <li><i className="dot audio" /><span>음원 제작</span><b>50만</b></li>
-              <li><i className="dot mv" /><span>뮤비 직접비</span><b>135만</b></li>
-              <li><i className="dot spare" /><span>통합 예비비</span><b>15만</b></li>
-            </ul>
-            <div className="rate-box">
-              <span>보조 인력 내부 기준</span>
-              <strong>시간당 12,000원</strong>
-              <p>2026년 최저임금 10,320원 이상. 식사와 교통은 별도 지급.</p>
-            </div>
-          </aside>
+        <div className="budget-groups">
+          {budgetGroups.map((group) => (
+            <article className={`budget-group budget-${group.key}`} key={group.key}>
+              <header><span>{group.number}</span><h3>{group.title}</h3><strong>{formatWon(group.total)}</strong></header>
+              <table>
+                <thead><tr><th>항목</th><th>금액</th></tr></thead>
+                <tbody>
+                  {group.rows.map(([item, amount]) => (
+                    <tr key={item}><td>{item}</td><td>{formatWon(amount)}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </article>
+          ))}
         </div>
+        <div className="budget-grand-total"><span>WORKING BUDGET</span><strong>2,000,000원</strong></div>
       </section>
 
       <section className="roadmap-section" id="roadmap">
@@ -239,35 +242,16 @@ export default function Home() {
               <li><b>콘셉트와 필수 장면 3개</b><small>동해 · 수제 세트 · 기타 퍼포먼스</small></li>
               <li><b>역할과 최종 결정권</b><small>연출, 촬영, 미술, 제작 진행, 편집</small></li>
               <li><b>촬영일과 예비일</b><small>이동 · 일몰 · 날씨까지 고려</small></li>
-              <li><b>비용 승인 방식</b><small>항목별 상한 초과 전 반드시 공유</small></li>
+              <li><b>자료 공유 방식</b><small>파일명 · 버전 · 전달 채널 통일</small></li>
               <li><b>후반작업 규칙</b><small>러프컷 날짜와 수정 2회까지</small></li>
             </ol>
           </article>
         </div>
       </section>
 
-      <section className="guardrails">
-        <div className="guardrail-copy"><p className="eyebrow">PRODUCTION RULES</p><h2>예산이 작을수록<br />범위를 선명하게</h2></div>
-        <div className="guardrail-grid">
-          <article><span>01</span><h3>사람의 임금을 먼저 보호</h3><p>장비나 미술 규모가 커지면 보조 인건비를 깎지 않고 장면 수를 줄인다.</p></article>
-          <article><span>02</span><h3>촬영은 최대 2일</h3><p>세트·퍼포먼스 1일, 동해 1일. 숙박이 필요하면 별도 예산 결정을 한다.</p></article>
-          <article><span>03</span><h3>변경은 잠금일 전에</h3><p>9월 9일 이후에는 곡 구조와 발매일을 바꾸지 않는다.</p></article>
-          <article><span>04</span><h3>수정은 2회</h3><p>러프컷 V1과 피드백 V2 뒤 픽처락. 취향별 무한 수정은 하지 않는다.</p></article>
-          <article><span>05</span><h3>실비와 사례비 분리</h3><p>교통, 식사, 대여료는 사례비에 포함시키지 않고 영수증 기준으로 정산한다.</p></article>
-          <article><span>06</span><h3>모든 기여를 크레디트로</h3><p>현금 사례비와 별개로 역할, 포트폴리오 권리, 기여 범위를 문서에 남긴다.</p></article>
-        </div>
-      </section>
-
       <footer>
         <div><span>LOW STAR · RELEASE PLAN</span><b>2026.08.29 기준</b></div>
         <p>발매일과 촬영 후보일은 제작팀 및 유통사 협의 전 가안입니다.</p>
-        <div className="source-links">
-          <a href="https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18144">2026 최저임금 · 고용노동부</a>
-          <a href="https://www.kofic.or.kr/kofic/business/rsch/findPolicyDetail.do?boardNumber=39&policyNo=7746">영화산업 표준보수 · KOFIC</a>
-          <a href="https://artists.spotify.com/en/new-releases">발매 준비 · Spotify for Artists</a>
-          <a href="https://musicspray.net/faq.html">유통 소요기간 · MusicSpray</a>
-          <a href="https://www.kasi.re.kr/kor/post/newsMaterial/32031">2026 공식 연휴 · 한국천문연구원</a>
-        </div>
       </footer>
     </main>
   );
