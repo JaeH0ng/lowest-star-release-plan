@@ -63,19 +63,18 @@ const calendarMonths = [
     events: {
       6: [{ title: t('기상 예비일 · 동해 촬영 종료', 'Weather backup, window closes'), kind: 'video' }],
       8: [{ title: t('마스터 · 유통자료 제출', 'Master and assets due'), kind: 'decision' }],
-      17: [{ title: t('스톱모션 본제작 완료', 'Stop motion complete'), kind: 'video' }],
-      18: [{ title: t('러프컷 V1', 'Rough cut V1'), kind: 'video' }],
-      25: [{ title: t('피드백 V2', 'Feedback V2'), kind: 'video' }],
-      30: [{ title: t('플랫폼 피칭 · 홍보', 'Pitching and promo'), kind: 'release' }],
+      15: [{ title: t('스톱모션 본제작 완료', 'Stop motion complete'), kind: 'video' }],
+      16: [{ title: t('러프컷 V1', 'Rough cut V1'), kind: 'video' }],
+      23: [{ title: t('피드백 V2', 'Feedback V2'), kind: 'video' }],
+      28: [{ title: t('픽처락 · 색보정', 'Picture lock and grade'), kind: 'video' }],
+      30: [{ title: t('뮤직비디오 최종본', 'Final music video'), kind: 'decision' }],
+      31: [{ title: t('업로드 · 티저 시작', 'Upload and teaser'), kind: 'release' }],
     } as Record<number, CalendarEvent[]>,
   },
   {
     name: 'NOVEMBER', month: 11, label: t('11월', 'Nov'), start: 0, days: 30,
     events: {
-      1: [{ title: t('픽처락 · 색보정', 'Picture lock and grade'), kind: 'video' }],
-      6: [{ title: t('뮤직비디오 최종본', 'Final music video'), kind: 'decision' }],
-      7: [{ title: t('업로드 · 티저 시작', 'Upload and teaser'), kind: 'release' }],
-      13: [{ title: t('음원 · MV 공개', 'Single and MV out'), kind: 'release' }],
+      6: [{ title: t('음원 · MV 공개 (잠정)', 'Single and MV out (provisional)'), kind: 'release' }],
     } as Record<number, CalendarEvent[]>,
   },
 ] as const;
@@ -90,7 +89,7 @@ const snapshot = [
   { n: '02', d: '09.09', label: t('유통사 · 발매일 · 곡 길이 잠금', 'Distributor, date and length locked') },
   { n: '03', d: '09.16', label: t('스톱모션 기획안 확정', 'Stop motion plan confirmed') },
   { n: '04', d: '10.08', label: t('마스터 및 유통자료 제출', 'Master and assets delivered') },
-  { n: '05', d: '11.06', label: t('뮤직비디오 최종본 완성', 'Final music video locked') },
+  { n: '05', d: '10.30', label: t('뮤직비디오 최종본 완성', 'Final music video locked') },
 ] as const;
 
 const rightsColumns = [
@@ -152,19 +151,19 @@ const roadmap = [
     v: [t('세트 제작 · 조명 세팅', 'Set building and lighting'), t('재료 구입, 미니어처 제작, 카메라 고정과 수동 노출 고정', 'Materials bought, miniatures built, camera and exposure locked')] as [L, L],
   },
   {
-    from: '09.21', to: '— 10.17', num: '05',
+    from: '09.21', to: '— 10.15', num: '05',
     a: [t('믹스 · 마스터', 'Mixing and mastering'), t('10.08 커버 · 소개글 · 크레디트와 함께 유통자료 제출', 'Artwork, notes and credits delivered by 10.08')] as [L, L],
     v: [t('스톱모션 본제작 (최장 구간)', 'Stop motion production (longest phase)'), t('프레임 촬영 · 드로잉 애니메이션. 동해 촬영 무박 1일을 이 기간에 끼워 넣는다', 'Frame by frame shooting and drawn animation. The one day East Sea shoot sits inside this window')] as [L, L],
   },
   {
-    from: '10.18', to: '— 11.06', num: '06',
+    from: '10.16', to: '— 10.30', num: '06',
     a: [t('발매 사전 세팅', 'Release setup'), t('플랫폼 등록 확인, 소개문, 피칭, 티저 준비', 'Platform registration, notes, pitching and teaser')] as [L, L],
     v: [t('후반작업', 'Post production'), t('러프컷 V1 → 피드백 V2 → 픽처락 → 색보정 · 독립 상영본 추출', 'Rough cut V1, feedback V2, picture lock, grade and standalone cut export')] as [L, L],
   },
   {
-    from: '11.07', to: '— 11.13', num: '07', final: true,
+    from: '10.31', to: '— 11.06', num: '07', final: true,
     a: [t('공개 준비', 'Release preparation'), t('프리세이브 · 채널 정리 · 링크와 게시물 예약', 'Pre-save, channels, links and scheduled posts')] as [L, L],
-    v: [t('동시 공개', 'Simultaneous release'), t('11월 13일 음원과 뮤직비디오 공개 · 크레딧과 참여확인서 발행', 'Single and music video released on 13 November. Credits and certificates issued')] as [L, L],
+    v: [t('동시 공개', 'Simultaneous release'), t('11월 6일 음원과 뮤직비디오 공개 · 크레딧과 참여확인서 발행', 'Single and music video released on 6 November. Credits and certificates issued')] as [L, L],
   },
 ] as const;
 
@@ -223,7 +222,7 @@ const c = {
     '작사·작곡을 마친 한 곡을 음원과 뮤직비디오로 완성해 세상에 내놓기 위한 11주 실행 일정과 제작 계획. 뮤직비디오는 손으로 만드는 스톱모션 애니메이션과 동해 로케이션 촬영으로 구성한다.',
     'An eleven week plan to take one finished song and release it as a single with a music video. The video is built from handmade stop motion animation and a single day of location shooting on the East Sea coast.',
   ),
-  releaseSub: t('FRIDAY · 일정 확정 마감 09.09', 'FRIDAY · schedule locked by 09.09'),
+  releaseSub: t('FRIDAY · 잠정 · 유통사 협의 후 확정', 'FRIDAY · provisional, to be fixed with the distributor'),
   dlTotal: t('총예산', 'Total'),
   dlAudio: t('음원', 'Audio'),
   dlVideo: t('뮤직비디오', 'Video'),
@@ -247,8 +246,8 @@ const c = {
   ),
   roadmapHeading: t('두 트랙, 하나의 발매일', 'Two tracks, one release date'),
   roadmapLead: t(
-    '음원과 영상은 따로 달리지만, 9월 9일 곡 길이 잠금과 10월 8일 마스터 제출에서 반드시 만난다. 전체 일정의 병목은 촬영이 아니라 약 4주가 걸리는 스톱모션 본제작이다.',
-    'Audio and video run separately but must meet twice: when the song length is locked on 9 September and when the master is delivered on 8 October. The bottleneck is not the shoot but the four weeks of stop motion production.',
+    '음원과 영상은 따로 달리지만, 9월 9일 곡 길이 잠금과 10월 8일 마스터 제출에서 반드시 만난다. 전체 일정의 병목은 촬영이 아니라 스톱모션 본제작이며, 발매일은 그 분량에 따라 결정된다.',
+    'Audio and video run separately but must meet twice: when the song length is locked on 9 September and when the master is delivered on 8 October. The bottleneck is not the shoot but stop motion production, and the release date follows from how much of it there is.',
   ),
   trackAudio: t('음원 제작', 'Audio'),
   trackVideo: t('뮤직비디오 제작', 'Music video'),
@@ -257,8 +256,8 @@ const c = {
   legendDecision: t('결정', 'Decision'),
   legendRelease: t('유통 · 공개', 'Release'),
   calNote: t(
-    '* 이 일정의 병목은 촬영이 아니라 9월 21일부터 10월 17일까지 약 4주간 이어지는 스톱모션 본제작이다. 동해 촬영은 그 기간 안에 무박 1일로 넣는다. 촬영일 1 · 2순위와 기상 예비일은 9월 2일 회의에서 확정하며, 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.',
-    '* The bottleneck is not the shoot but the four weeks of stop motion production from 21 September to 17 October. The single day East Sea shoot sits inside that window. First and second choice dates and a weather backup are fixed at the meeting on 2 September. The public holidays of 24 to 27 September and 3 to 5 October are excluded.',
+    '* 11월 6일은 잠정 발매일이며 유통사 협의를 거쳐 11월 초 중에 확정한다. 스톱모션 분량이 90초 안팎으로 정해지면 10월 30일 발매도 가능하다. 이 일정의 병목은 촬영이 아니라 스톱모션 본제작이고, 동해 촬영은 그 기간 안에 무박 1일로 넣는다. 촬영일 1 · 2순위와 기상 예비일은 9월 2일 회의에서 확정하며, 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.',
+    '* 6 November is provisional and will be fixed with the distributor within early November. If the stop motion runs to about 90 seconds, a release on 30 October becomes possible. The bottleneck is not the shoot but stop motion production, and the single day East Sea shoot sits inside that window. First and second choice dates and a weather backup are fixed at the meeting on 2 September. The public holidays of 24 to 27 September and 3 to 5 October are excluded.',
   ),
   meetHeading: t('수요일 회의에서 의논할 것', 'What we settle on Wednesday'),
   meetLead: t(
@@ -293,7 +292,7 @@ function CalendarMonth({ data, lang }: { data: (typeof calendarMonths)[number]; 
         {cells.map((day, index) => {
           const events = day ? data.events[day] : undefined;
           return (
-            <div key={`${data.month}-${index}`} className={`day-cell${events ? ' has-event' : ''}${data.month === 11 && day === 13 ? ' release-day' : ''}`}>
+            <div key={`${data.month}-${index}`} className={`day-cell${events ? ' has-event' : ''}${data.month === 11 && day === 6 ? ' release-day' : ''}`}>
               {day && <span className="day-number">{day}</span>}
               {events?.map((event) => (
                 <small key={event.title.ko} className={`event-${event.kind}`}>{event.title[lang]}</small>
@@ -369,7 +368,7 @@ export default function Home() {
           </section>
           <aside className="release-card" aria-label={c.releaseAria[lang]}>
             <p>WORKING RELEASE DATE</p>
-            <strong>2026. 11. 13</strong>
+            <strong>2026. 11. 06</strong>
             <span>{c.releaseSub[lang]}</span>
             <div className="release-rule" />
             <dl>
