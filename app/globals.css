@@ -122,7 +122,14 @@ td { padding: 14px 10px; border-bottom: 1px solid var(--line); }
 .calendar-heading h2 { margin: 0; font: 400 clamp(40px, 5vw, 68px) Georgia, serif; letter-spacing: -.05em; }
 .legend { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .legend span, .day-cell small { border-left: 3px solid; }
-.legend span { padding: 7px 10px; background: rgba(255,255,255,.62); font-size: 10px; }
+.legend span { padding: 7px 10px; background: rgba(255,255,255,.62); font-size: 10px; transition: opacity .18s ease; }
+.legend span.is-muted { opacity: .3; }
+.calendar-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 13px; }
+.cal-filter { display: flex; border: 1px solid rgba(16,23,34,.2); border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.62); }
+.cal-filter button { appearance: none; border: 0; background: transparent; cursor: pointer; padding: 8px 17px; font-family: inherit; font-size: 11px; letter-spacing: .03em; color: #5c646d; transition: background .18s ease, color .18s ease; }
+.cal-filter button + button { border-left: 1px solid rgba(16,23,34,.13); }
+.cal-filter button:hover { color: var(--ink); }
+.cal-filter button.is-active { background: var(--navy); color: #fff; }
 .event-audio { border-color: var(--gold) !important; }
 .event-video { border-color: #5f8eae !important; }
 .event-decision { border-color: var(--coral) !important; }
@@ -210,6 +217,7 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   .roadmap-track { min-height: auto; padding: 19px 20px; }
   .roadmap-track + .roadmap-track { border-left: 0; margin-top: 7px; }
   .calendar-heading { align-items: start; flex-direction: column; }
+  .calendar-controls { align-items: flex-start; }
   .legend { justify-content: flex-start; }
   .day-cell { min-height: 74px; padding: 5px; }
   .day-cell small { font-size: 8px; padding: 3px 4px; }
@@ -253,6 +261,9 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
 
   .months { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: none; width: 100%; }
   .calendar-section { width: 100%; }
+  .cal-filter { border: 0; background: transparent; }
+  .cal-filter button { display: none; }
+  .cal-filter button.is-active { display: block; padding: 0; background: transparent; color: #6f767e; font-size: 10px; }
   .month-card { break-after: auto; }
   .day-cell { min-height: 66px; padding: 4px; }
   .day-cell small { font-size: 7.6px; padding: 2px 4px; line-height: 1.3; }

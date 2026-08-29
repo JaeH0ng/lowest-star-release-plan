@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type Lang = 'ko' | 'en';
 type L = { ko: string; en: string };
@@ -40,35 +40,50 @@ const formatWon = (value: number, lang: Lang) =>
     ? `${(value / 10000).toLocaleString('ko-KR')}만 원`
     : `₩${value.toLocaleString('en-US')}`;
 
-type CalendarEvent = { title: L; kind: 'audio' | 'video' | 'release' | 'decision' };
+type CalendarTrack = 'album' | 'mv';
+type TrackFilter = 'all' | CalendarTrack;
+type CalendarEvent = { title: L; kind: 'audio' | 'video' | 'release' | 'decision'; track: CalendarTrack | 'both' };
+
+const calFilters: { key: TrackFilter; label: L }[] = [
+  { key: 'all', label: t('전체', 'All') },
+  { key: 'album', label: t('앨범 작업', 'Album') },
+  { key: 'mv', label: t('뮤비 작업', 'Music video') },
+];
+
+// 'both' 는 두 트랙이 반드시 만나는 지점이라 어느 보기에서도 사라지지 않는다.
+const inTrack = (event: CalendarEvent, filter: TrackFilter) =>
+  filter === 'all' || event.track === 'both' || event.track === filter;
 
 const calendarMonths = [
   {
     name: 'SEPTEMBER', month: 9, label: t('9월', 'Sep'), start: 2, days: 30,
     events: {
-      2: [{ title: t('제작팀 킥오프', 'Team kickoff'), kind: 'decision' }],
-      4: [{ title: t('유통사 3곳 문의', 'Contact 3 distributors'), kind: 'release' }],
-      9: [{ title: t('발매일 · 유통사 · 콘티 확정', 'Date, distributor, boards'), kind: 'decision' }],
-      13: [{ title: t('가녹음 · 가믹스', 'Scratch take'), kind: 'audio' }],
-      16: [{ title: t('스톱모션 기획안 확정', 'Stop motion plan due'), kind: 'video' }],
-      18: [{ title: t('본녹음 · 편집 완료', 'Final take done'), kind: 'audio' }],
-      20: [{ title: t('동해 촬영 (1순위)', 'East Sea shoot'), kind: 'decision' }],
-      21: [{ title: t('믹마 전달 · 스톱모션 착수', 'Files to engineer, animation starts'), kind: 'audio' }],
-      23: [{ title: t('기상 예비일', 'Weather backup'), kind: 'video' }],
+      2: [{ title: t('제작팀 킥오프', 'Team kickoff'), kind: 'decision', track: 'both' }],
+      4: [{ title: t('유통사 3곳 문의', 'Contact 3 distributors'), kind: 'release', track: 'album' }],
+      9: [{ title: t('발매일 · 유통사 · 콘티 확정', 'Date, distributor, boards'), kind: 'decision', track: 'both' }],
+      13: [{ title: t('가녹음 · 가믹스', 'Scratch take'), kind: 'audio', track: 'album' }],
+      16: [{ title: t('스톱모션 기획안 확정', 'Stop motion plan due'), kind: 'video', track: 'mv' }],
+      18: [{ title: t('본녹음 · 편집 완료', 'Final take done'), kind: 'audio', track: 'album' }],
+      20: [{ title: t('동해 촬영 (1순위)', 'East Sea shoot'), kind: 'decision', track: 'mv' }],
+      21: [
+        { title: t('믹스 · 마스터 파일 전달', 'Files to the engineer'), kind: 'audio', track: 'album' },
+        { title: t('스톱모션 본제작 착수', 'Stop motion starts'), kind: 'video', track: 'mv' },
+      ],
+      23: [{ title: t('기상 예비일', 'Weather backup'), kind: 'video', track: 'mv' }],
     } as Record<number, CalendarEvent[]>,
   },
   {
     name: 'OCTOBER', month: 10, label: t('10월', 'Oct'), start: 4, days: 31,
     events: {
-      3: [{ title: t('스톱모션 본제작 완료', 'Stop motion complete'), kind: 'video' }],
-      5: [{ title: t('러프컷 V1', 'Rough cut V1'), kind: 'video' }],
-      8: [{ title: t('믹스 · 마스터 완료', 'Mix and master done'), kind: 'audio' }],
-      9: [{ title: t('유통자료 제출', 'Assets to distributor'), kind: 'decision' }],
-      12: [{ title: t('피드백 V2', 'Feedback V2'), kind: 'video' }],
-      15: [{ title: t('픽처락 · 색보정', 'Picture lock and grade'), kind: 'video' }],
-      16: [{ title: t('뮤직비디오 최종본', 'Final music video'), kind: 'decision' }],
-      17: [{ title: t('업로드 · 티저 시작', 'Upload and teaser'), kind: 'release' }],
-      23: [{ title: t('음원 · MV 동시 공개', 'Single and MV out'), kind: 'release' }],
+      3: [{ title: t('스톱모션 본제작 완료', 'Stop motion complete'), kind: 'video', track: 'mv' }],
+      5: [{ title: t('러프컷 V1', 'Rough cut V1'), kind: 'video', track: 'mv' }],
+      8: [{ title: t('믹스 · 마스터 완료', 'Mix and master done'), kind: 'audio', track: 'album' }],
+      9: [{ title: t('유통자료 제출', 'Assets to distributor'), kind: 'decision', track: 'album' }],
+      12: [{ title: t('피드백 V2', 'Feedback V2'), kind: 'video', track: 'mv' }],
+      15: [{ title: t('픽처락 · 색보정', 'Picture lock and grade'), kind: 'video', track: 'mv' }],
+      16: [{ title: t('뮤직비디오 최종본', 'Final music video'), kind: 'decision', track: 'mv' }],
+      17: [{ title: t('업로드 · 티저 시작', 'Upload and teaser'), kind: 'release', track: 'both' }],
+      23: [{ title: t('음원 · MV 동시 공개', 'Single and MV out'), kind: 'release', track: 'both' }],
     } as Record<number, CalendarEvent[]>,
   },
 ] as const;
@@ -249,6 +264,7 @@ const c = {
   legendVideo: t('영상', 'Video'),
   legendDecision: t('결정', 'Decision'),
   legendRelease: t('유통 · 공개', 'Release'),
+  calFilterAria: t('달력 보기 전환', 'Calendar view'),
   calNote: t(
     '* 10월 23일은 제작자가 제안한 날짜이며 제작팀 의견과 유통사 리드타임을 확인해 함께 확정한다. 이 날짜는 스톱모션 60–90초와 유통사 리드타임 2주를 전제로 한다. 리드타임이 3주 이상이면 10월 30일 이후로 조정한다. 동해 촬영은 9월 20일 일요일을 1순위, 9월 23일 수요일을 기상 예비일로 두며 추석 연휴(9.24–27)는 제외했다.',
     '* 23 October is the date the producer proposes, to be confirmed together once the team has given its view and the distributor lead time is known. It assumes 60 to 90 seconds of stop motion and a two week distributor lead time. If the lead time is three weeks or more, the release moves to 30 October or later. The East Sea shoot is set for Sunday 20 September, with Wednesday 23 September as the weather backup. The Chuseok holiday of 24 to 27 September is excluded.',
@@ -270,7 +286,7 @@ const c = {
   snapshotAria: t('핵심 마일스톤', 'Key milestones'),
 };
 
-function CalendarMonth({ data, lang }: { data: (typeof calendarMonths)[number]; lang: Lang }) {
+function CalendarMonth({ data, lang, filter }: { data: (typeof calendarMonths)[number]; lang: Lang; filter: TrackFilter }) {
   const cells = Array.from({ length: 42 }, (_, index) => {
     const day = index - data.start + 1;
     return day > 0 && day <= data.days ? day : null;
@@ -284,9 +300,9 @@ function CalendarMonth({ data, lang }: { data: (typeof calendarMonths)[number]; 
       </div>
       <div className="calendar-grid">
         {cells.map((day, index) => {
-          const events = day ? data.events[day] : undefined;
+          const events = (day ? data.events[day] : undefined)?.filter((event) => inTrack(event, filter));
           return (
-            <div key={`${data.month}-${index}`} className={`day-cell${events ? ' has-event' : ''}${data.month === 10 && day === 23 ? ' release-day' : ''}`}>
+            <div key={`${data.month}-${index}`} className={`day-cell${events?.length ? ' has-event' : ''}${data.month === 10 && day === 23 ? ' release-day' : ''}`}>
               {day && <span className="day-number">{day}</span>}
               {events?.map((event) => (
                 <small key={event.title.ko} className={`event-${event.kind}`}>{event.title[lang]}</small>
@@ -317,6 +333,18 @@ function readInitialLang(): Lang {
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>(readInitialLang);
+  const [calFilter, setCalFilter] = useState<TrackFilter>('all');
+
+  // 지금 보이는 이벤트가 실제로 쓰는 색만 범례에 살려둔다.
+  const liveKinds = useMemo(() => {
+    const kinds = new Set<CalendarEvent['kind']>();
+    for (const month of calendarMonths) {
+      for (const list of Object.values(month.events)) {
+        for (const event of list) if (inTrack(event, calFilter)) kinds.add(event.kind);
+      }
+    }
+    return kinds;
+  }, [calFilter]);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -450,14 +478,29 @@ export default function Home() {
       <section className="calendar-section" id="calendar">
         <div className="calendar-heading">
           <div><p className="eyebrow">MASTER CALENDAR</p><h2>2026. 09 — 10</h2></div>
-          <div className="legend">
-            <span className="event-audio">{c.legendAudio[lang]}</span>
-            <span className="event-video">{c.legendVideo[lang]}</span>
-            <span className="event-decision">{c.legendDecision[lang]}</span>
-            <span className="event-release">{c.legendRelease[lang]}</span>
+          <div className="calendar-controls">
+            <div className="cal-filter" role="group" aria-label={c.calFilterAria[lang]}>
+              {calFilters.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  className={calFilter === option.key ? 'is-active' : undefined}
+                  aria-pressed={calFilter === option.key}
+                  onClick={() => setCalFilter(option.key)}
+                >
+                  {option.label[lang]}
+                </button>
+              ))}
+            </div>
+            <div className="legend">
+              <span className={liveKinds.has('audio') ? 'event-audio' : 'event-audio is-muted'}>{c.legendAudio[lang]}</span>
+              <span className={liveKinds.has('video') ? 'event-video' : 'event-video is-muted'}>{c.legendVideo[lang]}</span>
+              <span className={liveKinds.has('decision') ? 'event-decision' : 'event-decision is-muted'}>{c.legendDecision[lang]}</span>
+              <span className={liveKinds.has('release') ? 'event-release' : 'event-release is-muted'}>{c.legendRelease[lang]}</span>
+            </div>
           </div>
         </div>
-        <div className="months">{calendarMonths.map((month) => <CalendarMonth key={month.month} data={month} lang={lang} />)}</div>
+        <div className="months">{calendarMonths.map((month) => <CalendarMonth key={month.month} data={month} lang={lang} filter={calFilter} />)}</div>
         <p className="calendar-note">{c.calNote[lang]}</p>
       </section>
 
