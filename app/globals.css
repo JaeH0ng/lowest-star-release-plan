@@ -127,7 +127,7 @@ td { padding: 14px 10px; border-bottom: 1px solid var(--line); }
 .event-video { border-color: #5f8eae !important; }
 .event-decision { border-color: var(--coral) !important; }
 .event-release { border-color: var(--navy) !important; }
-.months { width: min(1380px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.months { width: min(980px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .month-card { background: var(--cream); border: 1px solid rgba(16,23,34,.12); }
 .month-card > header { padding: 25px 25px 20px; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); }
 .month-card > header span { color: var(--gold); font: italic 13px Georgia, serif; }
@@ -237,7 +237,9 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   .snapshot b { font-size: 17px; }
 
   .section-shell { width: 100%; padding: 26px 0; }
-  .roadmap-section .section-shell, .meeting-section { width: 100%; }
+  .roadmap-section .section-shell { width: calc(100% - 36px); margin: 0 auto; }
+  .meeting-section { width: calc(100% - 24px); margin: 0 auto; }
+  .calendar-section { width: calc(100% - 24px); margin: 0 auto; }
   .section-heading { gap: 10px; margin-bottom: 16px; }
   .section-heading h2 { margin: 4px 0; }
 
@@ -249,7 +251,7 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   .roadmap-list > article { grid-template-columns: 118px 1fr 1fr; }
   .roadmap-track { min-height: auto; padding: 15px 17px; }
 
-  .months { grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: none; width: 100%; }
+  .months { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: none; width: 100%; }
   .calendar-section { width: 100%; }
   .month-card { break-after: auto; }
   .day-cell { min-height: 60px; padding: 3px; }

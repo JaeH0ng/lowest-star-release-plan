@@ -71,12 +71,6 @@ const calendarMonths = [
       23: [{ title: t('음원 · MV 동시 공개', 'Single and MV out'), kind: 'release' }],
     } as Record<number, CalendarEvent[]>,
   },
-  {
-    name: 'NOVEMBER', month: 11, label: t('11월', 'Nov'), start: 0, days: 30,
-    events: {
-      6: [{ title: t('참여확인서 발행 · 아카이브 공개', 'Certificates issued, archive published'), kind: 'decision' }],
-    } as Record<number, CalendarEvent[]>,
-  },
 ] as const;
 
 const weekdays: Record<Lang, string[]> = {
@@ -455,7 +449,7 @@ export default function Home() {
 
       <section className="calendar-section" id="calendar">
         <div className="calendar-heading">
-          <div><p className="eyebrow">MASTER CALENDAR</p><h2>2026. 09 — 11</h2></div>
+          <div><p className="eyebrow">MASTER CALENDAR</p><h2>2026. 09 — 10</h2></div>
           <div className="legend">
             <span className="event-audio">{c.legendAudio[lang]}</span>
             <span className="event-video">{c.legendVideo[lang]}</span>
