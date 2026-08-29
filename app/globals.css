@@ -157,6 +157,14 @@ td { padding: 14px 10px; border-bottom: 1px solid var(--line); }
 .meeting-three article { padding-right: 22px; }
 .meeting-three article + article { padding-left: 22px; }
 .meeting-three h3 em { display: block; margin-top: 4px; color: #8a9099; font: italic 11px Georgia, serif; }
+.lang-toggle {
+  margin-left: 4px; padding: 5px 12px; background: transparent; cursor: pointer;
+  border: 1px solid currentColor; border-radius: 999px; color: inherit;
+  font: inherit; font-size: 11px; letter-spacing: .06em; line-height: 1.4;
+  transition: background .15s, color .15s;
+}
+.lang-toggle:hover { background: currentColor; }
+.lang-toggle:hover { color: var(--navy); }
 .meeting-columns article { padding: 28px 30px 0 0; }
 .meeting-columns article + article { border-left: 1px solid var(--line); padding-left: 30px; }
 .meeting-number { color: var(--gold); font: italic 20px Georgia, serif; }
@@ -187,7 +195,8 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   .meeting-section { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  .navlinks { display: none; }
+  .navlinks a { display: none; }
+  .navlinks { gap: 0; }
   .topbar { height: 76px; }
   .hero { padding-left: 22px; padding-right: 22px; }
   .snapshot { grid-template-columns: 1fr; width: calc(100% - 28px); }
@@ -215,6 +224,7 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
 
 @media print {
   .topbar { display: none; }
+  .lang-toggle { display: none; }
 
   .hero { min-height: auto; padding: 30px 26px 26px; }
   .hero-grid { grid-template-columns: 1.4fr .85fr; gap: 28px; padding-top: 0; }
