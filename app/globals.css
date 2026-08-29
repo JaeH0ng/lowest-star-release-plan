@@ -65,7 +65,7 @@ h1 em { color: #bcd0df; font-style: normal; font-weight: 360; }
 
 .snapshot {
   margin: -28px auto 0; width: min(1180px, calc(100% - 48px)); background: var(--cream);
-  display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(5, 1fr); position: relative; z-index: 2;
   box-shadow: 0 18px 60px rgba(17,27,45,.1);
 }
 .snapshot article { min-height: 122px; padding: 28px; display: flex; align-items: center; gap: 18px; border-right: 1px solid var(--line); }
@@ -175,6 +175,7 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   .snapshot { grid-template-columns: 1fr 1fr; }
   .snapshot article:nth-child(2) { border-right: 0; }
   .budget-groups { grid-template-columns: 1fr; }
+  .snapshot article { border-bottom: 1px solid var(--line); }
   .track-labels { margin-left: 130px; }
   .roadmap-list > article { grid-template-columns: 130px 1fr 1fr; }
   .months { grid-template-columns: 1fr; max-width: 650px; }
@@ -206,13 +207,44 @@ footer > p { margin: 0; text-align: right; color: rgba(255,255,255,.45); font-si
   footer > p { text-align: left; }
 }
 
+@page { size: A4 landscape; margin: 10mm; }
+
 @media print {
   .topbar { display: none; }
-  .hero { min-height: auto; padding-top: 48px; }
-  .snapshot { margin-top: 0; box-shadow: none; }
-  .section-shell { padding-top: 70px; padding-bottom: 70px; }
+
+  .hero { min-height: auto; padding: 30px 26px 26px; }
+  .hero-grid { grid-template-columns: 1.4fr .85fr; gap: 28px; padding-top: 0; }
+  .hero h1 { font-size: 46px; }
+  .hero-copy { font-size: 12px; }
+  .release-card { margin-top: 0; }
+
+  .snapshot { margin: 0 auto; width: 100%; box-shadow: none; grid-template-columns: repeat(5, 1fr); }
+  .snapshot article { min-height: auto; padding: 13px 12px; gap: 11px; border-bottom: 0; }
+  .snapshot b { font-size: 17px; }
+
+  .section-shell { width: 100%; padding: 26px 0; }
+  .roadmap-section .section-shell, .meeting-section { width: 100%; }
+  .section-heading { gap: 10px; margin-bottom: 16px; }
+  .section-heading h2 { margin: 4px 0; }
+
+  .budget-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .budget-group > header { min-height: auto; padding: 14px 16px 11px; }
+  .budget-group table { padding: 0 13px 10px; }
+
+  .track-labels { display: grid; margin-left: 118px; }
+  .roadmap-list > article { grid-template-columns: 118px 1fr 1fr; }
+  .roadmap-track { min-height: auto; padding: 15px 17px; }
+
+  .months { grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: none; width: 100%; }
+  .calendar-section { width: 100%; }
+  .month-card { break-after: auto; }
+  .day-cell { min-height: 60px; padding: 3px; }
+  .day-cell small { font-size: 7px; padding: 1px 3px; line-height: 1.25; }
+
+  .meeting-section { grid-template-columns: 1fr; gap: 20px; }
+  .meeting-columns { grid-template-columns: 1fr 1fr; }
+  .meeting-columns article + article { border-left: 1px solid var(--line); margin-top: 0; }
+
   .roadmap-list > article, .month-card, .meeting-columns article, .budget-group { break-inside: avoid; }
-  .months { grid-template-columns: 1fr; }
-  .month-card { break-after: page; }
-  a { text-decoration: none; }
+  section, footer { break-inside: auto; }
 }

@@ -40,8 +40,9 @@ const calendarMonths = [
       13: [{ title: '가녹음 · 가믹스', kind: 'audio' }],
       16: [{ title: '스톱모션 기획안 확정', kind: 'video' }],
       18: [{ title: '콘티 · 로케이션 확정', kind: 'video' }],
-      20: [{ title: '스톱모션 제작 착수', kind: 'video' }],
-      21: [{ title: '동해 촬영 창 시작 · 본녹음', kind: 'decision' }],
+      20: [{ title: '세트 · 조명 세팅 완료', kind: 'video' }],
+      21: [{ title: '스톱모션 본제작 시작', kind: 'video' }],
+      22: [{ title: '동해 촬영 창 시작', kind: 'decision' }],
       30: [{ title: '본녹음 완료', kind: 'audio' }],
     } as Record<number, CalendarEvent[]>,
   },
@@ -49,6 +50,7 @@ const calendarMonths = [
     name: 'OCTOBER', month: 10, start: 4, days: 31,
     events: {
       6: [{ title: '기상 예비일 · 동해 촬영 종료', kind: 'video' }],
+      17: [{ title: '스톱모션 본제작 완료', kind: 'video' }],
       8: [{ title: '마스터 · 유통자료 제출', kind: 'decision' }],
       18: [{ title: '러프컷 V1', kind: 'video' }],
       25: [{ title: '피드백 V2', kind: 'video' }],
@@ -135,8 +137,9 @@ export default function Home() {
       <section className="snapshot" aria-label="핵심 마일스톤">
         <article><span>01</span><div><b>09.02</b><p>제작팀 킥오프 회의</p></div></article>
         <article><span>02</span><div><b>09.09</b><p>유통사 · 발매일 · 곡 길이 잠금</p></div></article>
-        <article><span>03</span><div><b>10.08</b><p>마스터 및 유통자료 제출</p></div></article>
-        <article><span>04</span><div><b>11.06</b><p>뮤직비디오 최종본 완성</p></div></article>
+        <article><span>03</span><div><b>09.16</b><p>스톱모션 기획안 확정</p></div></article>
+        <article><span>04</span><div><b>10.08</b><p>마스터 및 유통자료 제출</p></div></article>
+        <article><span>05</span><div><b>11.06</b><p>뮤직비디오 최종본 완성</p></div></article>
       </section>
 
       <section className="section-shell" id="budget">
@@ -204,7 +207,7 @@ export default function Home() {
         <div className="section-shell">
           <div className="section-heading light-heading">
             <div><p className="eyebrow">11-WEEK ROADMAP</p><h2>두 트랙, 하나의 발매일</h2></div>
-            <p>음원과 영상은 따로 달리지만, 9월 9일 곡 길이 잠금과 10월 8일 마스터 제출에서 반드시 만난다.</p>
+            <p>음원과 영상은 따로 달리지만, 9월 9일 곡 길이 잠금과 10월 8일 마스터 제출에서 반드시 만난다. 전체 일정의 병목은 촬영이 아니라 <b>약 4주가 걸리는 스톱모션 본제작</b>이다.</p>
           </div>
 
           <div className="track-labels"><span>음원 제작</span><span>뮤직비디오 제작</span></div>
@@ -220,22 +223,22 @@ export default function Home() {
               <div className="roadmap-track video-track"><h3>기획 잠금</h3><p>한 문장 메시지, 필수 장면, 스톱모션 분량과 기법 방향</p></div>
             </article>
             <article>
-              <div className="roadmap-date"><b>09.10</b><span>— 09.30</span></div>
-              <div className="roadmap-track audio-track"><i>03</i><h3>녹음</h3><p>가녹음 · 가믹스 · 본녹음 · 보컬 편집 완료</p></div>
-              <div className="roadmap-track video-track"><h3>스톱모션 프리프로덕션</h3><p>09.16 기획안 확정 · 콘티, 세트 설계, 재료 구입, 조명 세팅</p></div>
+              <div className="roadmap-date"><b>09.10</b><span>— 09.16</span></div>
+              <div className="roadmap-track audio-track"><i>03</i><h3>가녹음</h3><p>가녹음 · 가믹스로 편집용 플레이백 확보</p></div>
+              <div className="roadmap-track video-track"><h3>스톱모션 기획안 확정</h3><p>기법 · 분량 · 프레임레이트 · 작업 공간 · 재료 목록 결정</p></div>
             </article>
             <article>
-              <div className="roadmap-date"><b>09.21</b><span>— 10.06</span></div>
-              <div className="roadmap-track audio-track"><i>04</i><h3>마스터 준비</h3><p>녹음 파일 정리 및 믹스 엔지니어 전달</p></div>
-              <div className="roadmap-track video-track"><h3>스톱모션 제작 · 동해 촬영</h3><p>미니어처 세트 촬영 병행 · 동해 무박 1일. 추석 · 개천절 연휴 제외</p></div>
+              <div className="roadmap-date"><b>09.17</b><span>— 09.20</span></div>
+              <div className="roadmap-track audio-track"><i>04</i><h3>본녹음</h3><p>보컬 · 악기 녹음과 편집</p></div>
+              <div className="roadmap-track video-track"><h3>세트 제작 · 조명 세팅</h3><p>재료 구입, 미니어처 제작, 카메라 고정과 수동 노출 고정</p></div>
+            </article>
+            <article className="long-span">
+              <div className="roadmap-date"><b>09.21</b><span>— 10.17</span></div>
+              <div className="roadmap-track audio-track"><i>05</i><h3>믹스 · 마스터</h3><p>10.08 커버 · 소개글 · 크레디트와 함께 유통자료 제출</p></div>
+              <div className="roadmap-track video-track"><h3>스톱모션 본제작 (최장 구간)</h3><p>프레임 촬영 · 드로잉 애니메이션. 동해 촬영 무박 1일을 이 기간에 끼워 넣는다</p></div>
             </article>
             <article>
-              <div className="roadmap-date"><b>10.01</b><span>— 10.08</span></div>
-              <div className="roadmap-track audio-track"><i>05</i><h3>믹스 · 마스터</h3><p>커버, 소개글, 크레디트와 함께 유통자료 제출</p></div>
-              <div className="roadmap-track video-track"><h3>소스 정리</h3><p>백업 2벌, 프레임 시퀀스 확인, 작품 사진 촬영</p></div>
-            </article>
-            <article>
-              <div className="roadmap-date"><b>10.05</b><span>— 11.06</span></div>
+              <div className="roadmap-date"><b>10.18</b><span>— 11.06</span></div>
               <div className="roadmap-track audio-track"><i>06</i><h3>발매 사전 세팅</h3><p>플랫폼 등록 확인, 소개문, 피칭, 티저 준비</p></div>
               <div className="roadmap-track video-track"><h3>후반작업</h3><p>러프컷 V1 → 피드백 V2 → 픽처락 → 색보정 · 독립 상영본 추출</p></div>
             </article>
@@ -254,7 +257,7 @@ export default function Home() {
           <div className="legend"><span className="event-audio">음원</span><span className="event-video">영상</span><span className="event-decision">결정</span><span className="event-release">유통 · 공개</span></div>
         </div>
         <div className="months">{calendarMonths.map((month) => <CalendarMonth key={month.month} data={month} />)}</div>
-        <p className="calendar-note">* 동해 촬영일 1 · 2순위와 기상 예비일은 9월 2일 회의에서 확정한다. 동해 촬영은 무박 1일 기준이며, 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.</p>
+        <p className="calendar-note">* 이 일정의 병목은 촬영이 아니라 9월 21일부터 10월 17일까지 약 4주간 이어지는 스톱모션 본제작이다. 동해 촬영은 그 기간 안에 무박 1일로 넣는다. 촬영일 1 · 2순위와 기상 예비일은 9월 2일 회의에서 확정하며, 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.</p>
       </section>
 
       <section className="meeting-section" id="meeting">
