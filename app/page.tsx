@@ -7,23 +7,21 @@ const budgetGroups = [
     ],
   },
   {
-    key: 'art', number: '02', title: '뮤비 기획 · 미술', total: 450000,
+    key: 'fee', number: '02', title: '참여 사례비', total: 400000,
     rows: [
-      ['기획 · 미술 메인 2명 × 15만 원', 300000],
-      ['세트 · 소품 · 미술 재료', 40000],
-      ['의상 · 소모품', 10000],
-      ['추가 보조 인력 풀', 50000],
-      ['예비비', 50000],
+      ['기획 · 미술 2명 × 15만 원', 300000],
+      ['동해 촬영 참여 1일', 100000],
     ],
   },
   {
-    key: 'shoot', number: '03', title: '촬영 · 후반 · 제작', total: 350000,
+    key: 'make', number: '03', title: '제작 · 실비', total: 400000,
     rows: [
-      ['촬영 · 편집 메인 1명 × 15만 원', 150000],
-      ['렌즈 · 조명 등 장비 대여', 30000],
+      ['스톱모션 · 소품 · 미술 재료', 180000],
+      ['조명 · 촬영 세팅', 40000],
       ['동해 이동 · 유류 · 통행 · 주차', 80000],
-      ['촬영 식사 · 간식', 70000],
+      ['촬영 · 작업일 식사 · 간식', 70000],
       ['저장 · 백업 매체', 20000],
+      ['예비비', 10000],
     ],
   },
 ] as const;
@@ -40,16 +38,17 @@ const calendarMonths = [
       4: [{ title: '유통사 3곳 문의', kind: 'release' }],
       9: [{ title: '발매일 · 곡 길이 잠금', kind: 'decision' }],
       13: [{ title: '가녹음 · 가믹스', kind: 'audio' }],
+      16: [{ title: '스톱모션 기획안 확정', kind: 'video' }],
       18: [{ title: '콘티 · 로케이션 확정', kind: 'video' }],
-      20: [{ title: '촬영 준비 완료', kind: 'video' }],
-      21: [{ title: '본촬영 창 시작 · 본녹음', kind: 'decision' }],
+      20: [{ title: '스톱모션 제작 착수', kind: 'video' }],
+      21: [{ title: '동해 촬영 창 시작 · 본녹음', kind: 'decision' }],
       30: [{ title: '본녹음 완료', kind: 'audio' }],
     } as Record<number, CalendarEvent[]>,
   },
   {
     name: 'OCTOBER', month: 10, start: 4, days: 31,
     events: {
-      6: [{ title: '기상 예비일 · 촬영창 종료', kind: 'video' }],
+      6: [{ title: '기상 예비일 · 동해 촬영 종료', kind: 'video' }],
       8: [{ title: '마스터 · 유통자료 제출', kind: 'decision' }],
       18: [{ title: '러프컷 V1', kind: 'video' }],
       25: [{ title: '피드백 V2', kind: 'video' }],
@@ -102,6 +101,7 @@ export default function Home() {
           <a className="brand" href="#top"><span>LOW STAR</span><small>release plan</small></a>
           <div className="navlinks">
             <a href="#budget">예산</a>
+            <a href="#rights">권리</a>
             <a href="#roadmap">로드맵</a>
             <a href="#calendar">캘린더</a>
             <a href="#meeting">회의</a>
@@ -114,7 +114,8 @@ export default function Home() {
             <h1>가장 낮은 별<br /><em>발매 프로젝트</em></h1>
             <p className="hero-copy">
               작사·작곡을 마친 한 곡을 음원과 뮤직비디오로 완성해 세상에 내놓기 위한
-              11주 실행 일정과 제작 계획.
+              11주 실행 일정과 제작 계획. 뮤직비디오는 손으로 만드는 스톱모션 애니메이션과
+              동해 로케이션 촬영으로 구성한다.
             </p>
           </section>
           <aside className="release-card" aria-label="발매 목표 요약">
@@ -141,7 +142,7 @@ export default function Home() {
       <section className="section-shell" id="budget">
         <div className="section-heading">
           <div><p className="eyebrow">BUDGET</p><h2>총예산 130만 원</h2></div>
-          <p className="budget-heading-total">음원 50 · 기획/미술 45 · 촬영/후반 35</p>
+          <p className="budget-heading-total">음원 50 · 사례비 40 · 제작 40</p>
         </div>
 
         <div className="budget-groups">
@@ -160,7 +161,43 @@ export default function Home() {
           ))}
         </div>
         <div className="budget-grand-total"><span>WORKING BUDGET</span><strong>1,300,000원</strong></div>
-        <p className="budget-condition">* 2일 촬영으로 숙박이 필요한 경우 숙박비는 참여자 공동 부담으로 별도 정산합니다.</p>
+        <p className="budget-condition">
+          * 동해 촬영은 무박 1일 기준입니다. 재료 · 조명 · 교통 · 식사는 전액 제작자가 부담하며, 참여자가 비용을 먼저 지출하지 않도록 직접 결제 또는 사전 지급합니다.
+          재료비는 콘셉트 확정 후와 중간 점검 후 두 차례로 나누어 집행합니다.
+        </p>
+      </section>
+
+
+      <section className="section-shell" id="rights">
+        <div className="section-heading">
+          <div><p className="eyebrow">CREDIT &amp; RIGHTS</p><h2>참여자가 갖는 것</h2></div>
+          <p className="budget-heading-total">저작권은 만든 사람에게</p>
+        </div>
+
+        <div className="meeting-columns">
+          <article>
+            <span className="meeting-number">A</span><h3>각자가 갖는 권리</h3>
+            <ol>
+              <li><b>작업물의 저작권을 그대로 보유</b><small>제작자에게 넘기지 않는다. 제작자는 뮤직비디오에 사용할 권리만 갖는다</small></li>
+              <li><b>포트폴리오 · 전시 · 공모전 자유 사용</b><small>별도 동의 절차 없이 자신의 작업을 발표할 수 있다</small></li>
+              <li><b>세트 · 소품 실물</b><small>촬영 후 폐기하지 않고 참여자가 전시 등에 활용할 수 있게 보관한다</small></li>
+              <li><b>독립 상영본과 원본 파일</b><small>자기 파트만 분리한 영상과 촬영 원본을 전달받는다</small></li>
+            </ol>
+          </article>
+          <article>
+            <span className="meeting-number">B</span><h3>제작자가 준비하는 자료</h3>
+            <ol>
+              <li><b>참여 계약서</b><small>09.02 작성. 역할 · 기간 · 보수 · 권리를 명시하고 양측 날인</small></li>
+              <li><b>작품 사진과 제작 과정 기록</b><small>세트 완성 시점에 고화질로 촬영. 나중에 다시 만들 수 없다</small></li>
+              <li><b>참여확인서</b><small>공개 후 1개월 이내 발행. 작품명 · 공개일 · 역할 · 기여 분량 · 보수 기재</small></li>
+              <li><b>작품 아카이브 페이지</b><small>공개일자와 전체 크레딧이 남는 인용 가능한 URL</small></li>
+            </ol>
+          </article>
+        </div>
+        <p className="budget-condition">
+          * 크레딧은 영상 엔딩 · 공개 채널 설명란 · 음원 앨범 소개 · 작품 아카이브 페이지 네 곳 모두에 표기하며, 역할명은 각자가 직접 정합니다.
+          사례비는 계좌이체로 지급하여 예술활동 수입 증빙이 남도록 합니다.
+        </p>
       </section>
 
       <section className="roadmap-section" id="roadmap">
@@ -175,37 +212,37 @@ export default function Home() {
             <article>
               <div className="roadmap-date"><b>08.29</b><span>— 09.02</span></div>
               <div className="roadmap-track audio-track"><i>01</i><h3>준비와 킥오프</h3><p>가사 · 데모 · 레퍼런스 · 예산표 준비</p></div>
-              <div className="roadmap-track video-track"><h3>제작팀 첫 회의</h3><p>콘셉트, 역할, 촬영 범위, 후보일 결정</p></div>
+              <div className="roadmap-track video-track"><h3>제작팀 첫 회의</h3><p>권리와 크레딧, 예산, 콘셉트, 역할, 촬영 후보일 결정</p></div>
             </article>
             <article>
               <div className="roadmap-date"><b>09.03</b><span>— 09.09</span></div>
               <div className="roadmap-track audio-track"><i>02</i><h3>곡 구조 잠금</h3><p>BPM · 구성 · 전체 길이 확정, 촬영용 플레이백 제작</p></div>
-              <div className="roadmap-track video-track"><h3>기획 잠금</h3><p>한 문장 메시지, 필수 장면, 유통사와 발매 가안 확정</p></div>
+              <div className="roadmap-track video-track"><h3>기획 잠금</h3><p>한 문장 메시지, 필수 장면, 스톱모션 분량과 기법 방향</p></div>
             </article>
             <article>
               <div className="roadmap-date"><b>09.10</b><span>— 09.30</span></div>
               <div className="roadmap-track audio-track"><i>03</i><h3>녹음</h3><p>가녹음 · 가믹스 · 본녹음 · 보컬 편집 완료</p></div>
-              <div className="roadmap-track video-track"><h3>프리프로덕션</h3><p>콘티, 로케이션, 소품, 의상, 장비, 콜시트 준비</p></div>
+              <div className="roadmap-track video-track"><h3>스톱모션 프리프로덕션</h3><p>09.16 기획안 확정 · 콘티, 세트 설계, 재료 구입, 조명 세팅</p></div>
             </article>
             <article>
               <div className="roadmap-date"><b>09.21</b><span>— 10.06</span></div>
               <div className="roadmap-track audio-track"><i>04</i><h3>마스터 준비</h3><p>녹음 파일 정리 및 믹스 엔지니어 전달</p></div>
-              <div className="roadmap-track video-track"><h3>본촬영</h3><p>세트 · 퍼포먼스 1일 + 동해 촬영 1일. 추석 · 개천절 연휴 제외</p></div>
+              <div className="roadmap-track video-track"><h3>스톱모션 제작 · 동해 촬영</h3><p>미니어처 세트 촬영 병행 · 동해 무박 1일. 추석 · 개천절 연휴 제외</p></div>
             </article>
             <article>
               <div className="roadmap-date"><b>10.01</b><span>— 10.08</span></div>
               <div className="roadmap-track audio-track"><i>05</i><h3>믹스 · 마스터</h3><p>커버, 소개글, 크레디트와 함께 유통자료 제출</p></div>
-              <div className="roadmap-track video-track"><h3>데이터 정리</h3><p>백업 2벌, 싱크 확인, 편집 프로젝트 인계</p></div>
+              <div className="roadmap-track video-track"><h3>소스 정리</h3><p>백업 2벌, 프레임 시퀀스 확인, 작품 사진 촬영</p></div>
             </article>
             <article>
               <div className="roadmap-date"><b>10.05</b><span>— 11.06</span></div>
               <div className="roadmap-track audio-track"><i>06</i><h3>발매 사전 세팅</h3><p>플랫폼 등록 확인, 소개문, 피칭, 티저 준비</p></div>
-              <div className="roadmap-track video-track"><h3>후반작업</h3><p>러프컷 V1 → 피드백 V2 → 픽처락 → 색보정 · 자막</p></div>
+              <div className="roadmap-track video-track"><h3>후반작업</h3><p>러프컷 V1 → 피드백 V2 → 픽처락 → 색보정 · 독립 상영본 추출</p></div>
             </article>
             <article className="final-roadmap">
               <div className="roadmap-date"><b>11.07</b><span>— 11.13</span></div>
               <div className="roadmap-track audio-track"><i>07</i><h3>공개 준비</h3><p>프리세이브 · 채널 정리 · 링크와 게시물 예약</p></div>
-              <div className="roadmap-track video-track"><h3>동시 공개</h3><p>11월 13일 음원과 공식 뮤직비디오 공개</p></div>
+              <div className="roadmap-track video-track"><h3>동시 공개</h3><p>11월 13일 음원과 뮤직비디오 공개 · 크레딧과 참여확인서 발행</p></div>
             </article>
           </div>
         </div>
@@ -217,34 +254,34 @@ export default function Home() {
           <div className="legend"><span className="event-audio">음원</span><span className="event-video">영상</span><span className="event-decision">결정</span><span className="event-release">유통 · 공개</span></div>
         </div>
         <div className="months">{calendarMonths.map((month) => <CalendarMonth key={month.month} data={month} />)}</div>
-        <p className="calendar-note">* 본촬영 2일과 기상 예비일은 9월 2일 회의에서 확정한다. 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.</p>
+        <p className="calendar-note">* 동해 촬영일 1 · 2순위와 기상 예비일은 9월 2일 회의에서 확정한다. 동해 촬영은 무박 1일 기준이며, 9월 24–27일과 10월 3–5일 공식 연휴는 촬영 창에서 제외했다.</p>
       </section>
 
       <section className="meeting-section" id="meeting">
         <div className="meeting-title">
           <p className="eyebrow">KICKOFF · 2026.09.02</p>
           <h2>수요일 회의에서<br />반드시 끝낼 것</h2>
-          <p>완성된 콘티를 가져가는 자리가 아니라, 누가 무엇을 언제까지 할지 결정하는 자리다.</p>
+          <p>완성된 콘티를 가져가는 자리가 아니라, 각자가 무엇을 갖고 무엇을 언제까지 할지 결정하는 자리다.</p>
         </div>
         <div className="meeting-columns">
           <article>
             <span className="meeting-number">A</span><h3>가져갈 자료</h3>
             <ol>
-              <li><b>가사와 데모</b><small>가능하면 최종 길이에 가까운 버전</small></li>
-              <li><b>한 문장 영상 방향</b><small>추락한 소년이 왜 날았는지 노래한다</small></li>
-              <li><b>레퍼런스 6–10장</b><small>동해, 검은 물가, 낮은 별, 손으로 만든 세트</small></li>
-              <li><b>예산 상한표</b><small>장비 · 재료 · 사례비 · 보조 인력 · 예비비</small></li>
-              <li><b>촬영 후보일</b><small>주촬영 2일과 기상 예비일</small></li>
+              <li><b>권리 안내문</b><small>각자가 갖는 권리, 제작자가 준비할 자료, 예술활동증명</small></li>
+              <li><b>안건표</b><small>순서와 시간이 정해진 진행표</small></li>
+              <li><b>예산 확정안 130만 원</b><small>항목별 상한과 실비 정산 방식</small></li>
+              <li><b>참여 계약서</b><small>1인당 2부. 그 자리에서 작성하고 날인</small></li>
+              <li><b>데모와 레퍼런스</b><small>곡, 스톱모션 톤, 동해 로케이션 후보</small></li>
             </ol>
           </article>
           <article>
             <span className="meeting-number">B</span><h3>그날 결정할 것</h3>
             <ol>
-              <li><b>콘셉트와 필수 장면 3개</b><small>동해 · 수제 세트 · 기타 퍼포먼스</small></li>
-              <li><b>역할과 최종 결정권</b><small>연출, 촬영, 미술, 제작 진행, 편집</small></li>
-              <li><b>촬영일과 예비일</b><small>이동 · 일몰 · 날씨까지 고려</small></li>
-              <li><b>자료 공유 방식</b><small>파일명 · 버전 · 전달 채널 통일</small></li>
-              <li><b>후반작업 규칙</b><small>러프컷 날짜와 수정 2회까지</small></li>
+              <li><b>크레딧 이름과 역할명</b><small>각자 직접 정한다. 모호한 표기는 쓰지 않는다</small></li>
+              <li><b>콘셉트와 동해 필수 컷</b><small>없으면 성립하지 않는 컷이 무엇인지</small></li>
+              <li><b>동해 촬영일과 예비일</b><small>1 · 2순위, 현장 인원, 차량, 집합 시간</small></li>
+              <li><b>스톱모션 기획안 마감일</b><small>09.16 목표. 분량과 기법, 작업 공간</small></li>
+              <li><b>계약 체결과 정산 방식</b><small>사례비 지급 시기, 재료비 집행 순서</small></li>
             </ol>
           </article>
         </div>
