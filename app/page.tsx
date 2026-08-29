@@ -7,23 +7,23 @@ const budgetGroups = [
     ],
   },
   {
-    key: 'art', number: '02', title: '뮤비 기획 · 미술', total: 390000,
+    key: 'art', number: '02', title: '뮤비 기획 · 미술', total: 580000,
     rows: [
       ['기획 · 미술 메인 2명 × 15만 원', 300000],
       ['세트 · 소품 · 미술 재료', 70000],
       ['의상 · 소모품', 20000],
+      ['추가 보조 인력 풀', 100000],
+      ['예비비', 90000],
     ],
   },
   {
-    key: 'shoot', number: '03', title: '촬영 · 후반 · 제작', total: 610000,
+    key: 'shoot', number: '03', title: '촬영 · 후반 · 제작', total: 420000,
     rows: [
       ['촬영 · 편집 메인 1명 × 15만 원', 150000],
       ['렌즈 · 조명 등 장비 대여', 80000],
       ['동해 이동 · 유류 · 통행 · 주차', 100000],
       ['촬영 식사 · 간식', 70000],
       ['저장 · 백업 매체', 20000],
-      ['추가 보조 인력 풀', 100000],
-      ['예비비', 90000],
     ],
   },
 ] as const;
@@ -141,7 +141,7 @@ export default function Home() {
       <section className="section-shell" id="budget">
         <div className="section-heading">
           <div><p className="eyebrow">BUDGET</p><h2>총예산 150만 원</h2></div>
-          <p className="budget-heading-total">음원 50 · 기획/미술 39 · 촬영/후반 61</p>
+          <p className="budget-heading-total">음원 50 · 기획/미술 58 · 촬영/후반 42</p>
         </div>
 
         <div className="budget-groups">
