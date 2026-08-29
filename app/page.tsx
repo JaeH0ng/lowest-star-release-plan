@@ -306,12 +306,15 @@ function CalendarMonth({ data, lang }: { data: (typeof calendarMonths)[number]; 
   );
 }
 
+const LANG_KEY = 'lowstar-lang-v2';
+
+// ?lang= 은 그 방문에만 적용하고 저장하지 않는다. 저장은 버튼을 눌렀을 때만 한다.
 function readInitialLang(): Lang {
   if (typeof window === 'undefined') return 'ko';
   const fromQuery = new URLSearchParams(window.location.search).get('lang');
   if (fromQuery === 'en' || fromQuery === 'ko') return fromQuery;
   try {
-    const stored = window.localStorage.getItem('lowstar-lang');
+    const stored = window.localStorage.getItem(LANG_KEY);
     if (stored === 'en' || stored === 'ko') return stored;
   } catch {
     // 저장소 접근이 막힌 브라우저에서는 기본값을 쓴다
@@ -324,12 +327,17 @@ export default function Home() {
 
   useEffect(() => {
     document.documentElement.lang = lang;
-    try {
-      window.localStorage.setItem('lowstar-lang', lang);
-    } catch {
-      // 저장이 막힌 브라우저에서도 화면은 정상 동작한다
-    }
   }, [lang]);
+
+  const toggleLang = () => {
+    const next: Lang = lang === 'ko' ? 'en' : 'ko';
+    setLang(next);
+    try {
+      window.localStorage.setItem(LANG_KEY, next);
+    } catch {
+      // 저장이 막힌 브라우저에서도 전환 자체는 동작한다
+    }
+  };
 
   return (
     <main>
@@ -345,7 +353,7 @@ export default function Home() {
             <button
               type="button"
               className="lang-toggle"
-              onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}
+              onClick={toggleLang}
               aria-label={c.toggleAria[lang]}
             >
               {c.toggleLabel[lang]}
