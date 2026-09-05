@@ -37,3 +37,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# 타입체크 캐시
+tsconfig.tsbuildinfo
